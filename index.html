@@ -104,7 +104,7 @@ fetch(apiUrl, {
   console.log(data); // 在這裏處理從 API 得到的 JSON 資料
 })
 .catch(error => {
-   settimeout(function() { alert(error.message); }, 1000);
+   setTimeout(function() { alert(error.message); }, 1000);
     console.error('Error:', error);
 });
 
