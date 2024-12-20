@@ -76,33 +76,37 @@
          <p>版權所有 &copy; 2024 我的網站</p>
       </footer>
       <script>
-         var apiUrl = "";//"http://" + in_ip + "/api/login";  // 替換成實際API的URL 250帳密是 //si_js01 / Js_12345
-            apiUrl = "http://istdemo.chiconypower.com/setter_2_0/api/login"
-        // var GetMyFun = callExternalAPI(apiUrl,"doraTest","Cpower_12345",Get_Line_UserId,LineGroupId,LineRoomId); // 呼叫API並傳入用戶訊息
-         
-         var options = {
-         'method': 'post',
-         'contentType': 'application/json',  // 指定內容類型為 JSON
-         'payload': JSON.stringify({
-          "username": "doraTest",
-          "password": "Cpower_12345",
-          "lang_id": 1,
-          "lineUserId": "abcd",
-          //"lineGroupId": in_groupId,
-          //"lineRoomId": in_roomId,
-          "grant_type": "password",
-          "loginType": 2
-         })
-         };
-         
-         try {
-         
-          //UrlFetchApp.fetch
-         var response = UrlFetchApp.fetch(url, options);
-         console.log(response.getContentText());
-         } catch (e) {
-         console.log('Error: ' + e.message);
-         }
+        
+   const apiUrl = "http://istdemo.chiconypower.com/setter_2_0/api/login"
+fetch(apiUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    "username": "doraTest",
+    "password": "Cpower_12345",
+    "lang_id": 1,
+    "lineUserId": "abcd",
+    //"lineGroupId": in_groupId,
+    //"lineRoomId": in_roomId,
+    "grant_type": "password",
+    "loginType": 2
+  })
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error(`Network response was not ok: ${response.statusText}`);
+  }
+  return response.json(); // 若 API 回傳的為 JSON 格式
+})
+.then(data => {
+  console.log(data); // 在這裏處理從 API 得到的 JSON 資料
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+
       </script>
    </body>
 </html>
