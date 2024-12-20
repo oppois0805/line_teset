@@ -95,9 +95,6 @@ fetch(apiUrl, {
   })
 })
 .then(response => {
-  if (!response.ok) {
-    throw new Error(`Network response was not ok: ${response.statusText}`);
-  }
   return response.json(); // 若 API 回傳的為 JSON 格式
 })
 .then(data => {
