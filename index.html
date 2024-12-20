@@ -1,101 +1,109 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <title>HTML5 Demo Page</title>
-
-    <style>
-        body {
-            font-family: "Noto Sans", "Helvetica", sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header, nav, main, footer {
-            padding: 20px;
-            margin: 0;
-        }
-
-        header {
-            background-color: #4CAF50;
-            color: #fff;
-        }
-
-        nav {
-            background-color: #eee;
-        }
-
-        nav a {
-            margin-right: 15px;
-            color: #333;
-            text-decoration: none;
-        }
-
-        main {
-            padding: 20px;
-            background-color: #f9f9f9;
-            min-height: 200px;
-        }
-
-        footer {
-            background-color: #4CAF50;
-            color: #fff;
-            text-align: center;
-        }
-
-        button {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>我的HTML5示範頁面</h1>
-    </header>
-
-    <nav>
-        <a href="#section1">關於我們</a>
-        <a href="#section2">產品介紹</a>
-        <a href="#section3">聯絡我們</a>
-    </nav>
-
-    <main>
-        <section id="section1">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>HTML5 Demo Page</title>
+      <style>
+         body {
+         font-family: "Noto Sans", "Helvetica", sans-serif;
+         margin: 0;
+         padding: 0;
+         }
+         header, nav, main, footer {
+         padding: 20px;
+         margin: 0;
+         }
+         header {
+         background-color: #4CAF50;
+         color: #fff;
+         }
+         nav {
+         background-color: #eee;
+         }
+         nav a {
+         margin-right: 15px;
+         color: #333;
+         text-decoration: none;
+         }
+         main {
+         padding: 20px;
+         background-color: #f9f9f9;
+         min-height: 200px;
+         }
+         footer {
+         background-color: #4CAF50;
+         color: #fff;
+         text-align: center;
+         }
+         button {
+         padding: 10px 15px;
+         background-color: #4CAF50;
+         color: white;
+         border: none;
+         cursor: pointer;
+         }
+         button:hover {
+         background-color: #45a049;
+         }
+      </style>
+   </head>
+   <body>
+      <header>
+         <h1>我的HTML5示範頁面</h1>
+      </header>
+      <nav>
+         <a href="#section1">關於我們</a>
+         <a href="#section2">產品介紹</a>
+         <a href="#section3">聯絡我們</a>
+      </nav>
+      <main>
+         <section id="section1">
             <h2>關於我們</h2>
             <p>這裡是示範網站的「關於我們」簡介文字。</p>
-        </section>
-
-        <section id="section2">
+         </section>
+         <section id="section2">
             <h2>產品介紹</h2>
             <p>這裡是產品介紹的簡述。</p>
             <button id="actionButton">點我顯示訊息</button>
-        </section>
-
-        <section id="section3">
+         </section>
+         <section id="section3">
             <h2>聯絡我們</h2>
             <p>這裡是聯絡資訊。</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>版權所有 &copy; 2024 我的網站</p>
-    </footer>
-
-    <script>
-        const button = document.getElementById('actionButton');
-        button.addEventListener('click', () => {
-            alert('你剛剛點擊了按鈕！');
-        });
-    </script>
-</body>
+         </section>
+      </main>
+      <footer>
+         <p>版權所有 &copy; 2024 我的網站</p>
+      </footer>
+      <script>
+         var apiUrl = "";//"http://" + in_ip + "/api/login";  // 替換成實際API的URL 250帳密是 //si_js01 / Js_12345
+            apiUrl = "http://istdemo.chiconypower.com/setter_2_0/api/login"
+        // var GetMyFun = callExternalAPI(apiUrl,"doraTest","Cpower_12345",Get_Line_UserId,LineGroupId,LineRoomId); // 呼叫API並傳入用戶訊息
+         
+         var options = {
+         'method': 'post',
+         'contentType': 'application/json',  // 指定內容類型為 JSON
+         'payload': JSON.stringify({
+          "username": "doraTest",
+          "password": "Cpower_12345",
+          "lang_id": 1,
+          "lineUserId": "abcd",
+          //"lineGroupId": in_groupId,
+          //"lineRoomId": in_roomId,
+          "grant_type": "password",
+          "loginType": 2
+         })
+         };
+         
+         try {
+         
+          //UrlFetchApp.fetch
+         var response = UrlFetchApp.fetch(url, options);
+         console.log(response.getContentText());
+         } catch (e) {
+         console.log('Error: ' + e.message);
+         return e.message
+         }
+      </script>
+   </body>
 </html>
