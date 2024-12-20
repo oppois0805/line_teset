@@ -95,17 +95,24 @@ fetch(apiUrl, {
   })
 })
 .then(response => {
- if (!response.ok) {
-    throw new Error(response.json());
+  if (!response.ok) {
+    // 非成功狀態碼時，先解析錯誤資訊
+    return response.json().then(data => {
+      // 假設後端回傳的錯誤格式中有 message 欄位
+      const errorMsg = data.message || '未知的錯誤訊息';
+      throw new Error(errorMsg);
+    });
   }
-  return response.json(); // 若 API 回傳的為 JSON 格式
+  return response.json(); // 正常情況直接解析為 JSON
 })
 .then(data => {
-  console.log(data); // 在這裏處理從 API 得到的 JSON 資料
+  console.log('成功資料：', data);
 })
 .catch(error => {
-       console.error('Error:', error);
+  // 這裡的 error.message 即為後端提供的錯誤訊息
+  console.log('錯誤訊息：', error.message);
 });
+
 
       </script>
    </body>
